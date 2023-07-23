@@ -1,36 +1,31 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        // Initialize Variables
-        int startPointer = 0;
-        int middleBound;
-        int endPointer;
-        
-        // Remove non-alphanumeric characters
-        String formattedString = "";
-        String lowerCaseString = s.toLowerCase();
-        for(int i = 0; i < lowerCaseString.length(); i++){
-            if(Character.isDigit(lowerCaseString.charAt(i)) || 
-               Character.isLetter(lowerCaseString.charAt(i))){
-                formattedString += lowerCaseString.charAt(i);
+
+        int i = 0;
+        int j = s.length() - 1;
+        while (i < j) {
+
+            Character start = s.charAt(i);
+            Character end = s.charAt(j);
+
+            if (!Character.isLetterOrDigit(start)) {
+                i++;
+                continue;
             }
-        }
-        middleBound = formattedString.length() / 2;
-        endPointer = formattedString.length() - 1;
-        
-        if(formattedString.equals("")) return true;
-        
-        
-        // Traverse string
-        for(int i = 0; i <= middleBound; i++){
-            if(formattedString.charAt(startPointer) != formattedString.charAt(endPointer)){
+
+            if (!Character.isLetterOrDigit(end)) {
+                j--;
+                continue;
+            }
+
+            if (Character.toLowerCase(start) != Character.toLowerCase(end)) {
                 return false;
             }
-            startPointer++;
-            endPointer--;
+
+            i++;
+            j--;    
         }
-        
-        // Return true if everything matches - is a palindrome
+
         return true;
-        
     }
-}
+} // Optimized Solution
